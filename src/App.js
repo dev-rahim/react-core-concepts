@@ -1,49 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
 
-  const employesData = [
-    { name: 'Ratul Sorkar', designation: 'Backend Developer' },
-    { name: 'Rahim Uddin', designation: 'Web Developer' },
-    { name: 'Rabondranath T', designation: 'Graphics Designer' },
-    { name: 'Debobroto Babu', designation: 'Programer' },
-    { name: 'Susanto Pal', designation: 'Software Developer' },
-  ]
+  // const employesData = [
+  //   { name: 'Ratul Sorkar', designation: 'Backend Developer' },
+  //   { name: 'Rahim Uddin', designation: 'Web Developer' },
+  //   { name: 'Rabondranath T', designation: 'Graphics Designer' },
+  //   { name: 'Debobroto Babu', designation: 'Programer' },
+  //   { name: 'Susanto Pal', designation: 'Software Developer' },
+  // ]
 
-  // const employesName = [
-  //   'Rahim Uddin',
-  //   'Nabila',
-  //   'Emon',
-  //   'Nobita',
-  //   'Sohag',
-  //   'Arafat',
-  // ]
-  // const employesRoll = [
-  //   '1250',
-  //   '1251',
-  //   '1252',
-  //   '1253',
-  //   '1254',
-  //   '1255',
-  // ]
+
   return (
     <div className="App">
-      {employesData.map(employ => <Project name={employ.name} designation={employ.designation}></Project>)}
-
-      {/* <Project name={employesName[0]} roll={employesRoll[0]}></Project> */}
+      <Counter></Counter>
+      {/* {employesData.map(employ => <Project name={employ.name} designation={employ.designation}></Project>)} */}
     </div>
   );
 }
 
+function Counter() {
+  const [count, setCount] = useState(50);
+  const Increase = () => {
+    setCount(count + 1);
+  }
+  const Decrease = () => setCount(count - 1)
+  return (
+    <div className="">
+      <h1 style={{ color: 'goldenRod' }} >Counter Application</h1>
+      <h2>Count: {count}</h2>
+      <button style={{ background: "black", color: "white", padding: '5px 10px', border: '2px solid aqua', borderRadius: '7px' }} onClick={Increase} >Increase</button>
+      <button style={{ background: "black", color: "white", padding: '5px 10px', border: '2px solid aqua', borderRadius: '7px', margin: '0 0 0 5px' }} onClick={Decrease} >Decrease</button>
+    </div>
+  )
+}
+
 function Project(props) {
-  /*  const box = {
-     color: 'red',
-     background: 'aqua',
-     margin: '10px 20px',
-     borderRadius: '10px',
-     border: '3px solid green'
-   } */
+
   return (
     <div className='Box'>
       <h3>Name: {props.name}</h3>
