@@ -18,11 +18,37 @@ function App() {
       <Counter></Counter>
       <ExternalUsers></ExternalUsers>
       <UsersComments></UsersComments>
+      <UserTodos></UserTodos>
       {/* {employesData.map(employ => <Project name={employ.name} designation={employ.designation}></Project>)} */}
     </div>
   );
 }
 
+function UserTodos() {
+  const [todos, setTodos] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res => res.json())
+      .then(data => setTodos(data))
+  }, [])
+  return (
+    <div >
+      <h1>User TODO</h1>
+      {
+        todos.map(todo => <Todos userId={todo.id} title={todo.title}></Todos>)
+      }
+    </div>
+  )
+}
+
+function Todos(props) {
+  return (
+    <div className='Box'>
+      <h3>User Id: {props.userId}</h3>
+      <h3>To Do: {props.title}</h3>
+    </div>
+  )
+}
 
 function UsersComments() {
   const [comments, setComments] = useState([]);
@@ -35,7 +61,7 @@ function UsersComments() {
     <div>
       <h1>User Comments</h1>
       {
-        comments.map(comment =>  <Comments name={comment.name} email={comment.email} body={comment.body}></Comments> )
+        comments.map(comment => <Comments name={comment.name} email={comment.email} body={comment.body}></Comments>)
       }
     </div>
   );
