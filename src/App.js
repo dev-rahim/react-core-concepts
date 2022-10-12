@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -16,11 +16,69 @@ function App() {
   return (
     <div className="App">
       <Counter></Counter>
+      <ExternalUsers></ExternalUsers>
+      <UsersComments></UsersComments>
       {/* {employesData.map(employ => <Project name={employ.name} designation={employ.designation}></Project>)} */}
     </div>
   );
 }
 
+
+function UsersComments() {
+  const [comments, setComments] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/comments')
+      .then(res => res.json())
+      .then(data => setComments(data))
+  }, [])
+  return (
+    <div>
+      <h1>User Comments</h1>
+      {
+        comments.map(comment =>  <Comments name={comment.name} email={comment.email} body={comment.body}></Comments> )
+      }
+    </div>
+  );
+}
+
+function Comments(props) {
+  return (
+    <div className='Box'>
+      <h3>Name: {props.name}</h3>
+      <h4>Name: {props.email}</h4>
+      <h5>Name: {props.body}</h5>
+    </div>
+  );
+}
+
+function ExternalUsers() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(data => setUsers(data))
+  }, [])
+  return (
+    <div>
+      <h3>External User</h3>
+      {
+        users.map(user => <Users name={user.name} email={user.email}></Users>)
+      }
+    </div>
+  );
+}
+
+// single user div 
+function Users(props) {
+  return (
+    <div className="Box">
+      <h3>Name: {props.name}</h3>
+      <p>Email: {props.email}</p>
+    </div>
+  )
+}
+
+// component of counter
 function Counter() {
   const [count, setCount] = useState(50);
   const Increase = () => {
